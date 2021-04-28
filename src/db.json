@@ -1,0 +1,54 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "first_name": "Sebastian",
+      "last_name": "Eschweiler",
+      "email": "sebastian@codingthesmartway.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Steve",
+      "last_name": "Palmer",
+      "email": "steve@codingthesmartway.com"
+    },
+    {
+      "id": 3,
+      "first_name": "Ann",
+      "last_name": "Smith",
+      "email": "ann@codingthesmartway.com"
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "first_name": "Jim",
+      "last_name": "Kwik",
+      "email": "jim@test.com"
+    }
+  ],
+  "users": [
+    {
+      "firstName": "Yuriy",
+      "lastName": "Gagarin",
+      "email": "gagarin@gmail.com",
+      "id": 1619603157680
+    },
+    {
+      "firstName": "Yuriy",
+      "lastName": "Andropov",
+      "email": "theboss@gmail.com",
+      "id": 1619603174431
+    },
+    {
+      "firstName": "J",
+      "lastName": "Biden",
+      "email": "thepresident@usa.gov",
+      "id": 1619604763104
+    }
+  ]
+}
