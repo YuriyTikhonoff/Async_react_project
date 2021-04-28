@@ -20,50 +20,50 @@ function App() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [updatedUser, setUpdatedUser] = useState({});
 
-  const addUser = async (user) => {
-    const newUser = { ...user, id: Date.now() };
+  // const addUser = async (user) => {
+  //   const newUser = { ...user, id: Date.now() };
 
-    try {
-      const response = await axios.post("http://localhost:3000/users", newUser);
-      console.log(response.data);
-      setUsers([...users, response.data]);
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+  //   try {
+  //     const response = await axios.post("http://localhost:3000/users", newUser);
+  //     console.log(response.data);
+  //     setUsers([...users, response.data]);
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // };
 
-  const updateUser = async (updatedUser) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:3000/users/${updatedUser.id}`,
-        updatedUser
-      );
-      const updatedUserFromBackEnd = response.data;
-      //console.log(updatedUserFromBackEnd);
-      setUsers(
-        users.map((user) =>
-          user.id === updatedUserFromBackEnd.id ? updatedUserFromBackEnd : user
-        )
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  // const updateUser = async (updatedUser) => {
+  //   try {
+  //     const response = await axios.put(
+  //       `http://localhost:3000/users/${updatedUser.id}`,
+  //       updatedUser
+  //     );
+  //     const updatedUserFromBackEnd = response.data;
+  //     //console.log(updatedUserFromBackEnd);
+  //     setUsers(
+  //       users.map((user) =>
+  //         user.id === updatedUserFromBackEnd.id ? updatedUserFromBackEnd : user
+  //       )
+  //     );
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
-  const openUpdateForm = (user) => {
-    setUpdatedUser(user);
-    setIsUpdating(true);
-    console.log(`The updated user is ${user.firstName}`);
-  };
+  // const openUpdateForm = (user) => {
+  //   setUpdatedUser(user);
+  //   setIsUpdating(true);
+  //   console.log(`The updated user is ${user.firstName}`);
+  // };
 
-  const deleteUser = async (id) => {
-    try {
-      const response = await axios.delete(`http://localhost:3000/users/${id}`);
-      setUsers([...users].filter((user) => user.id !== id));
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+  // const deleteUser = async (id) => {
+  //   try {
+  //     const response = await axios.delete(`http://localhost:3000/users/${id}`);
+  //     setUsers([...users].filter((user) => user.id !== id));
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // };
 
   return (
     <div className="App container">
