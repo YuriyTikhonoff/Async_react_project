@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchUsers } from "./store/actions/userActions";
 import axios from "axios";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import "./App.css";
@@ -10,11 +12,9 @@ import UpdateUser from "./components/UpdateUser/UpdateUser";
 
 function App() {
   const [users, setUsers] = useState([]);
-  useEffect(async () => {
-    const dataUsers = await axios.get("http://localhost:3000/users");
-    console.log(dataUsers.data);
-    setUsers(dataUsers.data);
-  }, []);
+  // useEffect(async () => {
+  //   // useDispatch(fetchUsers());
+  // }, []);
 
   const [isAdding, setIsAdding] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -50,11 +50,11 @@ function App() {
   //   }
   // };
 
-  // const openUpdateForm = (user) => {
-  //   setUpdatedUser(user);
-  //   setIsUpdating(true);
-  //   console.log(`The updated user is ${user.firstName}`);
-  // };
+  const openUpdateForm = (user) => {
+    setUpdatedUser(user);
+    setIsUpdating(true);
+    console.log(`The updated user is ${user.firstName}`);
+  };
 
   // const deleteUser = async (id) => {
   //   try {
@@ -75,21 +75,15 @@ function App() {
         }}
         onClick={() => setIsAdding(!isAdding)}
       />
-      {isAdding && <AddUser addUser={addUser} />}
+      {isAdding && <AddUser />}
       {isUpdating && (
         <UpdateUser
           user={updatedUser}
-          updateUser={updateUser}
           closeUpdateForm={() => setIsUpdating(false)}
         />
       )}
 
-      <TableUsers
-        users={users}
-        deleteUser={deleteUser}
-        openUpdateForm={openUpdateForm}
-        updateUser={updateUser}
-      />
+      <TableUsers users={users} openUpdateForm={openUpdateForm} />
     </div>
   );
 }
