@@ -13,11 +13,12 @@ import {
   UPDATE_USER_FAIL,
 } from "../constants/userConstants";
 import axios from "axios";
+import { apiUsersURL } from "../../API/api_config";
 
 export const fetchUsers = () => async (dispatch) => {
   try {
     dispatch({ type: FETCH_USERS_REQUST });
-    const response = await axios.get("http://localhost:3000/users");
+    const response = await axios.get(apiUsersURL);
     const fetchedUsers = response.data;
     dispatch({ type: FETCH_USERS_SUCCESS, payload: fetchedUsers });
   } catch (error) {
@@ -28,7 +29,7 @@ export const fetchUsers = () => async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_USER_REQUST });
-    await axios.delete(`http://localhost:3000/users/${id}`);
+    await axios.delete(`${apiUsersURL}${id}`);
     dispatch({ type: DELETE_USER_SUCCESS, payload: id });
   } catch (error) {
     dispatch({ type: DELETE_USER_FAIL, payload: error.message });
@@ -38,7 +39,7 @@ export const deleteUser = (id) => async (dispatch) => {
 export const addUser = (newUser) => async (dispatch) => {
   try {
     dispatch({ type: ADD_USER_REQUST });
-    const response = await axios.post(`http://localhost:3000/users/`, newUser);
+    const response = await axios.post(apiUsersURL, newUser);
     const newUserResponse = response.data;
     dispatch({ type: ADD_USER_SUCCESS, payload: newUserResponse });
   } catch (error) {
@@ -50,7 +51,7 @@ export const updateUser = (updatedUser) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_USER_REQUST });
     const response = await axios.put(
-      `http://localhost:3000/users/${updatedUser.id}`,
+      `${apiUsersURL}${updatedUser.id}`,
       updatedUser
     );
     const updatedUserResponse = response.data;
