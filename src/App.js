@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "./store/actions/userActions";
 import axios from "axios";
 import { AiOutlineFileAdd } from "react-icons/ai";
@@ -11,10 +11,12 @@ import UpdateUser from "./components/UpdateUser/UpdateUser";
 //json-server --watch db.json   // запускаем в терминале в папке с файлом db.json
 
 function App() {
-  const [users, setUsers] = useState([]);
-  // useEffect(async () => {
-  //   // useDispatch(fetchUsers());
-  // }, []);
+  // const [users, setUsers] = useState([]);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
 
   const [isAdding, setIsAdding] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -83,7 +85,7 @@ function App() {
         />
       )}
 
-      <TableUsers users={users} openUpdateForm={openUpdateForm} />
+      <TableUsers openUpdateForm={openUpdateForm} />
     </div>
   );
 }
