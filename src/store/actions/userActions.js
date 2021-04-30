@@ -5,6 +5,12 @@ import {
   DELETE_USER_REQUST,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL,
+  ADD_USER_REQUST,
+  ADD_USER_SUCCESS,
+  ADD_USER_FAIL,
+  UPDATE_USER_REQUST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL,
 } from "../constants/userConstants";
 import axios from "axios";
 
@@ -26,6 +32,31 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch({ type: DELETE_USER_SUCCESS, payload: id });
   } catch (error) {
     dispatch({ type: DELETE_USER_FAIL, payload: error.message });
+  }
+};
+
+export const addUser = (newUser) => async (dispatch) => {
+  try {
+    dispatch({ type: ADD_USER_REQUST });
+    const response = await axios.post(`http://localhost:3000/users/`, newUser);
+    const newUserResponse = response.data;
+    dispatch({ type: ADD_USER_SUCCESS, payload: newUserResponse });
+  } catch (error) {
+    dispatch({ type: ADD_USER_FAIL, payload: error.message });
+  }
+};
+
+export const updateUser = (updatedUser) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_USER_REQUST });
+    const response = await axios.put(
+      `http://localhost:3000/users/${updatedUser.id}`,
+      updatedUser
+    );
+    const updatedUserResponse = response.data;
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: updatedUserResponse });
+  } catch (error) {
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: error.message });
   }
 };
 

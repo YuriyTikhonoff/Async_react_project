@@ -1,7 +1,9 @@
 //import "./AddUser.css";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../store/actions/userActions";
 
-const UpdateUser = ({ updateUser, user, closeUpdateForm }) => {
+const UpdateUser = ({ user, closeUpdateForm }) => {
   const [formState, setFormState] = useState({ ...user });
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -9,13 +11,13 @@ const UpdateUser = ({ updateUser, user, closeUpdateForm }) => {
     //console.log(formState);
   };
 
+  const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(formState);
-    updateUser(formState);
-    setTimeout(() => closeUpdateForm(), 1500);
-    //setFormState({ ...user });
-    //addUser(formState);
+    dispatch(updateUser(formState));
+    closeUpdateForm();
   };
 
   return (

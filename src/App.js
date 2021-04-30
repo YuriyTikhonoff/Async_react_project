@@ -52,7 +52,10 @@ function App() {
   //   }
   // };
 
+  const closeAddForm = () => setIsAdding(false);
+
   const openUpdateForm = (user) => {
+    closeAddForm();
     setUpdatedUser(user);
     setIsUpdating(true);
     console.log(`The updated user is ${user.firstName}`);
@@ -77,7 +80,7 @@ function App() {
         }}
         onClick={() => setIsAdding(!isAdding)}
       />
-      {isAdding && <AddUser />}
+      {isAdding && <AddUser closeAddForm={closeAddForm} />}
       {isUpdating && (
         <UpdateUser
           user={updatedUser}

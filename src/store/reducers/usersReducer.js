@@ -5,6 +5,12 @@ import {
   DELETE_USER_REQUST,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL,
+  ADD_USER_REQUST,
+  ADD_USER_SUCCESS,
+  ADD_USER_FAIL,
+  UPDATE_USER_REQUST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL,
 } from "../constants/userConstants";
 
 export const usersReducer = (state = {}, action) => {
@@ -15,6 +21,34 @@ export const usersReducer = (state = {}, action) => {
       return { ...state, users: action.payload, loading: false };
     case FETCH_USERS_FAIL:
       return { ...state, error: action.payload, loading: false };
+
+    //Section for adding a user
+    case ADD_USER_REQUST:
+      return { ...state, loading: true };
+    case ADD_USER_SUCCESS:
+      return {
+        ...state,
+        users: state.users.concat(action.payload),
+        loading: false,
+      };
+    case ADD_USER_FAIL:
+      return { ...state, error: action.payload, loading: false };
+
+    //Section for updating a user
+    case UPDATE_USER_REQUST:
+      return { ...state, loading: true };
+    case UPDATE_USER_SUCCESS:
+      const updatedUser = action.payload;
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === updatedUser.id ? updatedUser : user
+        ),
+        loading: false,
+      };
+    case UPDATE_USER_FAIL:
+      return { ...state, error: action.payload, loading: false };
+
     //Section for deleting a user
     case DELETE_USER_REQUST:
       return { ...state, loading: true };

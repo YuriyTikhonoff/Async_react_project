@@ -1,8 +1,10 @@
 import "./AddUser.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/actions/userActions";
 import axios from "axios";
 
-const AddUser = ({ addUser }) => {
+const AddUser = ({ closeAddForm }) => {
   const [formState, setFormState] = useState({});
 
   const inputHandler = (e) => {
@@ -11,10 +13,13 @@ const AddUser = ({ addUser }) => {
     //console.log(formState);
   };
 
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("submitted");
-    addUser(formState);
+    console.log({ ...formState, id: Date.now() });
+    dispatch(addUser({ ...formState, id: Date.now() }));
+    closeAddForm();
   };
 
   return (
@@ -39,7 +44,14 @@ const AddUser = ({ addUser }) => {
           </label>
         </div>
         <div className="form-item">
-          <button type="submit">Submit</button>
+          <button
+            onClick={closeAddForm}
+            type="button"
+            style={{ marginRight: "10px" }}
+          >
+            Cancel
+          </button>
+          <button type="submit">Add user</button>
         </div>
       </form>
     </>
