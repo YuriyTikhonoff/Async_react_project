@@ -57,7 +57,7 @@ export const updateUser = (updatedUser) => async (dispatch) => {
     const updatedUserResponse = response.data;
     dispatch({ type: UPDATE_USER_SUCCESS, payload: updatedUserResponse });
   } catch (error) {
-    dispatch({ type: UPDATE_USER_SUCCESS, payload: error.message });
+    dispatch({ type: UPDATE_USER_FAIL, payload: error.message });
   }
 };
 
