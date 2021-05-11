@@ -50,6 +50,7 @@ const TableUsers = ({ updateUser, openUpdateForm }) => {
               </td>
             </tr>
           ))}
+          )
         </tbody>
       )}
     </table>

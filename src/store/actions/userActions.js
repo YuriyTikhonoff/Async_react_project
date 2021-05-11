@@ -12,14 +12,15 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAIL,
 } from "../constants/userConstants";
+
+import userAPI from "../../API/usersApi/usersAPI";
 import axios from "axios";
 import { apiUsersURL } from "../../API/api_config";
 
 export const fetchUsers = () => async (dispatch) => {
   try {
     dispatch({ type: FETCH_USERS_REQUST });
-    const response = await axios.get(apiUsersURL);
-    const fetchedUsers = response.data;
+    const fetchedUsers = await userAPI.fetchAllUsers();
     dispatch({ type: FETCH_USERS_SUCCESS, payload: fetchedUsers });
   } catch (error) {
     dispatch({ type: FETCH_USERS_FAIL, payload: error.message });
